@@ -3,6 +3,7 @@ import { findProductById } from "./productData.mjs";
 
 function addProductToCart(product) {
   let cart = getLocalStorage("so-cart"); //ensures that cart is set to the saved cart data from localStorage, or an empty array if none exists, so it can safely use array methods like .push().
+<<<<<<< HEAD
 
   try {
     const existing = JSON.parse(localStorage.getItem("so-cart"));
@@ -16,6 +17,14 @@ function addProductToCart(product) {
     console.error("Failed to parse localStorage cart:", e);
   }
 
+=======
+  
+  if(!Array.isArray(cart)){
+    console.warn("Cart was not an array, resetting cart.");
+    cart = [];
+  }
+  
+>>>>>>> 822daeb9ed60e6e4925c14aa8e9af6b4fe0adab5
   cart.push(product); //adds the new product to the end of the cart array, allowing multiple products to accumulate over time.
   setLocalStorage("so-cart", cart); //saves the updated cart array back to localStorage as a JSON string under the key "so-cart".
 }

@@ -9,31 +9,39 @@ async function renderProductDetails(productId) {
     const tentJson = await findProductById(productId)
     // const name = document.getElementById("productName");
     // name.textContent = tentJson.Name;
-    document
-        .getElementById("productName")
-        .textContent = tentJson.Name;
-    document
-        .getElementById("productNameWithoutBrand")
-        .textContent = tentJson.NameWithoutBrand;
-    document
-        .getElementById("productImage")
-        .src = tentJson.Image;
-    document
-        .getElementById("productFinalPrice")
-        .textContent = `$${tentJson.FinalPrice}`;
-    document
-        .getElementById("productColorName")
-        .textContent = tentJson.Colors[0].ColorName;
-    document
-        .getElementById("productDescriptionHtmlSimple")
-        .innerHTML = tentJson.DescriptionHtmlSimple;
-    document
-        .getElementById("addToCart")
-        .setAttribute("data-id", productId)
-    document
-        .getElementById("addToCart")
-        .addEventListener("click", () => addProductToCart(tentJson));
-
+    if (tentJson) {
+      document
+          .getElementById("productName")
+          .textContent = tentJson.Name;
+      document
+          .getElementById("productNameWithoutBrand")
+          .textContent = tentJson.NameWithoutBrand;
+      document
+          .getElementById("productImage")
+          .src = tentJson.Image;
+      document
+          .getElementById("productFinalPrice")
+          .textContent = `$${tentJson.FinalPrice}`;
+      document
+          .getElementById("productColorName")
+          .textContent = tentJson.Colors[0].ColorName;
+      document
+          .getElementById("productDescriptionHtmlSimple")
+          .innerHTML = tentJson.DescriptionHtmlSimple;
+      document
+          .getElementById("addToCart")
+          .setAttribute("data-id", productId)
+      document
+          .getElementById("addToCart")
+          .addEventListener("click", () => addProductToCart(tentJson));
+    }
+    else {
+      // Add the "hide" class to the first element with the "product-detail" class
+      // to hide it and remove the same class from the first element with the
+      // "product-error" class
+      document.querySelector(".product-detail").classList.add("hide");
+      document.querySelector(".product-error").classList.remove("hide");
+    }
 }
 
 function addProductToCart(productId) {

@@ -1,5 +1,5 @@
 import { findProductById } from "./productData.mjs";
-import { getLocalStorage, setLocalStorage, } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, setCartItems } from "./utils.mjs";
 
 export function productDetails(productId) {
     renderProductDetails(productId)
@@ -64,6 +64,8 @@ function addProductToCart(productId) {
   
     cart.push(productId); //adds the new product to the end of the cart array, allowing multiple products to accumulate over time.
     setLocalStorage("so-cart", cart); //saves the updated cart array back to localStorage as a JSON string under the key "so-cart".
+  
+    setCartItems(cart.length)
   }
 
   

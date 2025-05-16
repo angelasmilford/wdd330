@@ -85,7 +85,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -116,6 +116,16 @@ button {
   padding-top: 1em;
   position: relative;
   text-align: center;
+}
+
+.cart-items {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 80%;
+  background-color: var(--primary-color);
 }
 
 .cart svg {

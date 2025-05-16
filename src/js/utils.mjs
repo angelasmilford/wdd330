@@ -28,3 +28,14 @@ export function getParams(param) {
   const product = urlParams.get(param);
   return product;
 }
+
+export function setCartItems(itemCount) {
+  const cartItems = document.querySelector(".cart-items");
+  
+  if (itemCount > 0) {
+    if (cartItems.classList.contains("hide")) cartItems.classList.remove("hide");
+    cartItems.textContent = itemCount;
+  } else {
+    if (!cartItems.classList.contains("hide")) cartItems.classList.add("hide");
+  }
+}

@@ -38,3 +38,20 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
+
+export function renderWithTemplate(templateFn, parentElement, data, position="afterbegin", clear=false, callback) {
+  
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+
+  parentElement.insertAdjacentHTML(position, template);
+  if(callback){
+    callback(data);
+  }
+  
+}
+
+export function loadTemplate(path){
+
+}

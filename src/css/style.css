@@ -105,6 +105,15 @@ button {
   cursor: pointer;
 }
 
+button.quantity-button {
+  padding: 0;
+  min-width: 1.5em;
+  min-height: 1.5em;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
@@ -202,7 +211,7 @@ button {
   grid-column: 1;
 }
 
-.cart-card p {
+.cart-card>p {
   margin-top: 0;
 }
 
@@ -219,6 +228,22 @@ button {
 .cart-card__quantity {
   grid-row: 1;
   grid-column: 3;
+  display: grid;
+  grid-template-columns: 1fr 75% 1fr;
+}
+
+.cart-card__quantity-add {
+  grid-column: 1 / 2;
+}
+
+.cart-card__quantity-subtract {
+  grid-column: 3 / 4;
+}
+
+.cart-cart__quantity-value {
+  grid-column: 2 / 3;
+  margin: auto;
+  text-align: center;
 }
 
 .cart-card__price {
@@ -244,7 +269,8 @@ button {
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
-    margin: auto;
+    margin-top: auto;
+    margin: auto 0;
   }
 
   .mission {

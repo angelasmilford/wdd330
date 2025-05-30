@@ -2,8 +2,14 @@ import { getLocalStorage, renderWithTemplate, loadHeaderFooter } from "./utils.m
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  
+  if (Array.isArray(cartItems) && cartItems.length > 0) {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  } else {
+    const emptyCartHTML = `<p>Your shopping cart is empty.</p>`;
+    document.querySelector(".product-list").innerHTML = emptyCartHTML;
+  }
 
   // Ideally will be merged with along with the empty cart logic later down the line.
   if (Array.isArray(cartItems) && cartItems.length > 0) {

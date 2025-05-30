@@ -29,13 +29,71 @@ export function getParams(param) {
   return product;
 }
 
-export function setCartItems(itemCount) {
-  const cartItems = document.querySelector(".cart-items");
+export function renderListWithTemplate(templateFn, parentElement, list, position="afterbegin", clear=false) {
+  let htmlStrings = list.map((item) => templateFn(item));
   
-  if (itemCount > 0) {
-    if (cartItems.classList.contains("hide")) cartItems.classList.remove("hide");
-    cartItems.textContent = itemCount;
-  } else {
-    if (!cartItems.classList.contains("hide")) cartItems.classList.add("hide");
+  if (clear) {
+    parentElement.innerHTML = "";
   }
+
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
+
+export async function renderWithTemplate(templateFn, parentElement, data, position="afterbegin", clear=false, callback) {
+  const template = await templateFn();
+
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+
+  parentElement.insertAdjacentHTML(position, template);
+
+  if(callback){
+    callback(data);
+  }
+}
+
+export function loadTemplate(path) {
+  return async function() {
+    const response = await fetch(path);
+
+    if (response.ok) {
+      const text = await response.text();
+      return text;
+    } else {
+      throw new Error(`Failed to load template: ${path}`);
+    }
+  }
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
+
+  const header = document.getElementById("main-header");
+  const footer = document.getElementById("main-footer");
+
+  renderWithTemplate(headerTemplateFn, header);
+  renderWithTemplate(footerTemplateFn, footer)
+}
+
+export function updateCartItems() {
+  let cartContents = getLocalStorage("so-cart");
+  let itemCount = cartContents.reduce((accum, item) => accum + item.multiple, 0);
+
+  // Unsure if this is the best way to wait for the cart-item element to load in, but this is what I've got.
+  let timerId = setInterval(() => {
+    const cartItems = document.querySelector(".cart-items");
+  
+    if (cartItems) {
+      if (itemCount > 0) {
+        if (cartItems.classList.contains("hide")) cartItems.classList.remove("hide");
+        cartItems.textContent = itemCount;
+      } else {
+        if (!cartItems.classList.contains("hide")) cartItems.classList.add("hide");
+      }
+      // Clear interval timer once the element has loaded:
+      clearInterval(timerId);
+    }
+  }, 100);
 }

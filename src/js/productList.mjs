@@ -28,7 +28,7 @@ function productCardTemplate(product) {
 
 export async function sortedProductList(selector, category, method="default") {
   let list = await getData(category);
-  console.log(list)
+
   switch (method) {
     case "high-to-low":
       list.sort((a, b) => a.FinalPrice < b.FinalPrice);
@@ -46,8 +46,6 @@ export async function sortedProductList(selector, category, method="default") {
       list.sort((a, b) => a.Brand.Name > b.Brand.Name);
       break;
   }
-
-  console.log(list)
 
   renderListWithTemplate(productCardTemplate, selector, list, "afterbegin", true);
 }

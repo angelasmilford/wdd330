@@ -21,7 +21,7 @@ function toggleButton(selectedButton) {
             button.classList.add("sort-button-selected");
         }
     }
-    console.log(selectedButton.getAttribute("sort-method"))
+    
     sortedProductList(productListHTML, category, selectedButton.getAttribute("sort-method"));
 }
 

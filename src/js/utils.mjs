@@ -51,7 +51,6 @@ export async function renderWithTemplate(templateFn, parentElement, data, positi
   if(callback){
     callback(data);
   }
-  
 }
 
 export function loadTemplate(path) {
@@ -76,4 +75,25 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplateFn, header);
   renderWithTemplate(footerTemplateFn, footer)
+}
+
+export function updateCartItems() {
+  let cartContents = getLocalStorage("so-cart");
+  let itemCount = cartContents.reduce((accum, item) => accum + item.multiple, 0);
+
+  // Unsure if this is the best way to wait for the cart-item element to load in, but this is what I've got.
+  let timerId = setInterval(() => {
+    const cartItems = document.querySelector(".cart-items");
+  
+    if (cartItems) {
+      if (itemCount > 0) {
+        if (cartItems.classList.contains("hide")) cartItems.classList.remove("hide");
+        cartItems.textContent = itemCount;
+      } else {
+        if (!cartItems.classList.contains("hide")) cartItems.classList.add("hide");
+      }
+      // Clear interval timer once the element has loaded:
+      clearInterval(timerId);
+    }
+  }, 100);
 }

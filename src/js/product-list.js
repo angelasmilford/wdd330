@@ -1,9 +1,10 @@
 import productList from "./productList.mjs";
-import { loadHeaderFooter, getParams } from "./utils.mjs";
+import { loadHeaderFooter, getParams, updateCartItems } from "./utils.mjs";
 const productListHTML = document.querySelector(".product-list");
 const category = getParams("category");
 const topProducts = document.querySelector("span");
 const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 topProducts.textContent = capitalizedCategory;
 loadHeaderFooter();
-productList(productListHTML, category)
+updateCartItems();
+productList(productListHTML, category);

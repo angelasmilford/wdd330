@@ -1,4 +1,4 @@
-import { getLocalStorage, loadHeaderFooter, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter, setLocalStorage, updateCartItems } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -33,12 +33,18 @@ function renderCartContents() {
     // Reduce the card array to gather the total cost of all items.
     const total = cartItems.reduce((final, item) => final += item.FinalPrice * item.multiple, 0);
 
-    // Convert the total price in the cart to a formatted USD string. 
-    const formattedTotal = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(total)
+    // Convert the total price in the cart to a formatted USD string.
+    const formattedTotal = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(total);
 
     // Set the text content of the cart total to the formatted price.
-    document.querySelector(".cart-total").textContent = `Total: ${formattedTotal}`;
+    document.querySelector(".cart-total").textContent =
+      `Total: ${formattedTotal}`;
   }
+
+  updateCartItems();
 }
 
 function cartItemTemplate(item) {
@@ -67,3 +73,4 @@ function cartItemTemplate(item) {
 
 renderCartContents();
 loadHeaderFooter();
+updateCartItems();

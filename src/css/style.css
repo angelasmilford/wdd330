@@ -4,6 +4,7 @@
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
+  --secondary-button-color: #373b16;
   --tertiary-color: #a4b8c4;
   --light-grey: #d0d0d0;
   --dark-grey: #303030;
@@ -103,6 +104,10 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--secondary-button-color);
 }
 
 button.quantity-button {
@@ -276,11 +281,48 @@ button.quantity-button {
   
 }
 
+.sort-buttons {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--light-grey);
+  overflow: hidden;
+}
+
+.sort-button-selected {
+  background-color: var(--secondary-button-color);
+}
+
+.sort-buttons p {
+  display: flex;
+  flex-direction: row;
+  margin: auto 0.5em;
+}
+
+.sort-button {
+  font-size: small;
+  padding: 0.5em;
+  width: 100%;
+  border-radius: 0.25em;
+  margin: 0.25em;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
     margin-top: auto;
     margin: auto 0;
+  }
+
+  .sort-button {
+    font-size: medium; 
+    width: 100%;
+    border-radius: 0.5em;
+    margin: 0.25em;
+  }
+
+  .sort-buttons {
+    border-radius: 0.5em;
+    max-width: 600px;
   }
 
   .mission {

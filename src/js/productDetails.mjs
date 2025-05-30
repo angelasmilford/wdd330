@@ -18,7 +18,7 @@ async function renderProductDetails(productId) {
           .textContent = tentJson.NameWithoutBrand;
       document
           .getElementById("productImage")
-          .src = tentJson.Image;
+          .src = tentJson.Images.PrimaryLarge;
       document
           .getElementById("productFinalPrice")
           .textContent = `$${tentJson.FinalPrice}`;

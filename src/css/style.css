@@ -255,6 +255,17 @@ button.quantity-button {
   display: none;
 }
 
+.icons img {
+  max-height: 150px;
+}
+
+.icons a {
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -270,7 +281,12 @@ button.quantity-button {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
+  .icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+ }
 }
+
 
 footer {
   font-size: var(--small-font);

@@ -1,5 +1,5 @@
 
-import { getData } from "./productData.mjs"
+import { getProductsByCategory } from "./externalServices.mjs"
 import { renderListWithTemplate } from "./utils.mjs";
 
 // function renderList(selector, productList) {
@@ -30,7 +30,7 @@ export default async function productList(selector, category) {
     // get the element we will insert the list into from the selector
     // get the list of products 
     // render out the product list to the element
-    let list = await getData(category)
+    let list = await getProductsByCategory(category)
     console.log(list);
     // let filteredList = filterList(list)
     

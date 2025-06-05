@@ -6,7 +6,7 @@ import {
   updateCartItems,
 } from "./utils.mjs";
 
-import { findProductById } from "./productData.mjs";
+import { findProductById } from "./externalServices.mjs";
 import { productDetails } from "./productDetails.mjs";
 
 const productId = getParams("product");

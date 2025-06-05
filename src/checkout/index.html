@@ -1,25 +1,78 @@
 <!doctype html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
 
-    <title>Sleep Outside | Checkout</title>
-    <script src="../js/checkout.js"></script>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <header class="divider" id="main-header"> </header>
+  <title>Sleep Outside | Cart</title>
 
-    <main class="divider">
-      <section class="products">
-        <h2>Review & Place your Order</h2>
-      </section>
-    </main>
+  <link rel="stylesheet" href="/css/style.css" />
 
-    <footer id="main-footer"> </footer>
-  </body>
+  <script src="../js/checkout.js" type="module"></script>
+</head>
+
+<body>
+  <header class="divider" id="main-header"> </header>
+
+  <main class="divider">
+      <form action="#" id="checkout-form">
+          <fieldset>
+            <legend>Shipping</legend>
+            <label>
+              First Name
+              <input type="text" name="fname" id="fname">
+            </label>
+            <label>
+              Last Name
+              <input type="text" name="lname" id="lname">
+            </label>
+            <label>
+              Street
+              <input type="text" name="street" id="street">
+            </label>
+            <label>
+              City
+              <input type="text" name="city" id="city">
+            </label>
+            <label>
+              State
+              <input type="text" name="state" id="state">
+            </label>
+            <label>
+              Zip
+              <input type="number" name="zip" id="zip">
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <label>
+              Card Number
+              <input type="text" name="cardNumber" id="cardNumber">
+            </label>
+            <label>
+              Expiration
+              <input type="text" name="expiration" id="expiration">
+            </label>
+            <label>
+              Security Code
+              <input type="text" name="code" id="code">
+            </label>
+          </fieldset>
+          <fieldset class="order-summary">
+            <legend>Order Summary</legend>
+            <p>Item Subtotal:<span class="sub-total-count"></span><span class="sub-total-cost"></span></p>
+            <p>Shipping Estimate:<span class="shipping-estimate"></span></p>
+            <p>Tax:<span class="tax"></span></p>
+            <p>Order Total:<span class="order-total"></span></p>
+          </fieldset>
+          <button id="checkout-button">Checkout</button>
+      </form>
+  </main>
+
+  <footer id="main-footer"> </footer>
+</body>
+
 </html>

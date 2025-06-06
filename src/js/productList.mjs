@@ -24,7 +24,31 @@ function productCardTemplate(product) {
               <h2 class="card__name">${product.Name}</h2>
               <p class="product-card__price">${product.FinalPrice}</p></a>
           </li>`
-}    
+}
+
+export async function sortedProductList(selector, category, method="default") {
+  let list = await getData(category);
+
+  switch (method) {
+    case "high-to-low":
+      list.sort((a, b) => a.FinalPrice < b.FinalPrice);
+      break;
+    case "low-to-high":
+      list.sort((a, b) => a.FinalPrice > b.FinalPrice);
+      break;
+    case "name-a-z":
+      list.sort((a, b) => a.Name > b.Name);
+      break;
+    case "name-z-a":
+      list.sort((a, b) => a.Name < b.Name);
+      break;
+    case "brand":
+      list.sort((a, b) => a.Brand.Name > b.Brand.Name);
+      break;
+  }
+
+  renderListWithTemplate(productCardTemplate, selector, list, "afterbegin", true);
+}
 
 export default async function productList(selector, category) {
     // get the element we will insert the list into from the selector

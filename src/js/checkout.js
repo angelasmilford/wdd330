@@ -11,7 +11,11 @@ checkoutHandler.init("so-cart", orderSummary);
 
 const zipInput = document.getElementById("zip");
 
-zipInput.addEventListener("focusout", () => {
+if (zipInput.value) {
+    checkoutHandler.calculateOrderTotal(zipInput.value);
+}
+
+zipInput.addEventListener("change", () => {
     checkoutHandler.calculateOrderTotal(zipInput.value)
 })
 
@@ -21,8 +25,12 @@ checkoutForm.addEventListener("submit", async function(event) {
 
     const form = event.target;
 
-    checkoutHandler.calculateOrderTotal(zipInput.value);
-    const payload = await checkoutHandler.checkout(form)
-    const response = await checkout(payload);
-    console.log(response);
+    try {
+        checkoutHandler.calculateOrderTotal(zipInput.value);
+        const payload = await checkoutHandler.checkout(form)
+        const response = await checkout(payload);
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
 })

@@ -1,4 +1,4 @@
-import { getLocalStorage, loadHeaderFooter, setLocalStorage, updateCartItems } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter, setLocalStorage, startCartAnimation, updateCartItems } from "./utils.mjs";
 
 function renderCartContents() {
   let productListElement = document.querySelector(".product-list");
@@ -34,12 +34,14 @@ function renderCartContents() {
       cartItems[item].multiple += 1;
       setLocalStorage("so-cart", cartItems);
       renderCartContents();
+      startCartAnimation();
     });
 
     subButton.addEventListener("click", () => {
       cartItems[item].multiple = Math.max(cartItems[item].multiple - 1, 1);
       setLocalStorage("so-cart", cartItems);
       renderCartContents();
+      startCartAnimation();
     });
   }
 

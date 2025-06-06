@@ -10,7 +10,6 @@
   --dark-grey: #303030;
   --red: #c92e2e;
   --red-hover: #962929;
-
   /* sizes */
   --font-base: 18px;
   --small-font: 0.8em;
@@ -36,6 +35,11 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
+}
+
+.breadcrumb {
+  padding: 0;
+  margin: 0;
 }
 
 .logo {
@@ -73,7 +77,6 @@ header {
   font-size: var(--small-font);
   width: 110px;
   height: 80px;
-
   flex-direction: column;
   align-items: flex-end;
   box-shadow: 1px 1px 4px var(--light-grey);
@@ -88,7 +91,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -126,7 +129,6 @@ button.quantity-button {
 }
 
 /* End utility classes */
-
 /* Cart icon styles */
 .cart {
   padding-top: 1em;
@@ -153,7 +155,6 @@ button.quantity-button {
 }
 
 /* End cart icon styles */
-
 .mission {
   padding: 0 0.5em;
   /* margin: 0.5em 0; */
@@ -203,7 +204,6 @@ button.quantity-button {
 }
 
 /* End product list card */
-
 .product-detail {
   padding: 1em;
   max-width: 500px;
@@ -298,7 +298,6 @@ button.quantity-button {
   text-align: center;
   color: black;
   text-decoration: none;
-  
 }
 
 .sort-buttons {
@@ -341,6 +340,32 @@ button.quantity-button {
   height: 5em;
 }
 
+input {
+  display: block;
+  margin-bottom: 1em;
+  width: 20em
+}
+
+@keyframes cart-icon { 
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    width: 1.8em;
+    height: 1.8em;
+    transform: translateY(5px) translateX(2.5px);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+.animate {
+  animation: cart-icon;
+  animation-duration: 0.5s;
+  animation-timing-function: linear
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -349,7 +374,7 @@ button.quantity-button {
   }
 
   .sort-button {
-    font-size: medium; 
+    font-size: medium;
     width: 100%;
     border-radius: 0.5em;
     margin: 0.25em;
@@ -369,12 +394,12 @@ button.quantity-button {
     grid-template-columns: 150px auto 8em 6em;
     width: 100%;
   }
+
   .icons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
- }
+  }
 }
-
 
 footer {
   font-size: var(--small-font);

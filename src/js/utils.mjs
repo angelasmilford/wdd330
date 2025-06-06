@@ -97,3 +97,12 @@ export function updateCartItems() {
     }
   }, 100);
 }
+
+export function startCartAnimation() {
+  // https://css-tricks.com/restart-css-animation/
+  const cartElement = document.querySelector(".cart");
+  cartElement.classList.remove("animate");
+  void cartElement.offsetWidth;
+  cartElement.classList.add("animate");
+  console.log(document.querySelector(".cart"));
+}

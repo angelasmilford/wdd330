@@ -14,6 +14,15 @@ function packageItems(items) {
     return simplifiedItems;
 }
 
+function formatCurrency(amount) {
+    const formattedTotal = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+    }).format(amount);
+
+    return formattedTotal;
+}
+
 export default class checkoutProcess {
     key = "";
     list = [];
@@ -72,10 +81,10 @@ export default class checkoutProcess {
         const taxSpan = this.outputSelector.querySelector(".tax");
         const orderTotalSpan = this.outputSelector.querySelector(".order-total");
 
-        subTotalSpan.textContent = this.subTotal;
-        shippingSpan.textContent = this.shipping;
-        taxSpan.textContent = this.tax;
-        orderTotalSpan.textContent = this.orderTotal;
+        subTotalSpan.textContent = formatCurrency(this.subTotal);
+        shippingSpan.textContent = formatCurrency(this.shipping);
+        taxSpan.textContent = formatCurrency(this.tax);
+        orderTotalSpan.textContent = formatCurrency(this.orderTotal);
     }
 
     checkout = async function(form) {

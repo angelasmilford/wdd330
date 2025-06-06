@@ -1,15 +1,32 @@
 import { getLocalStorage, loadHeaderFooter, setLocalStorage, updateCartItems } from "./utils.mjs";
 
 function renderCartContents() {
+  let productListElement = document.querySelector(".product-list");
   const cartItems = getLocalStorage("so-cart");
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  productListElement.innerHTML = htmlItems.join("");
 
-  const productList = document.querySelector(".product-list");
-  productList.innerHTML = htmlItems.join("");
+  // Get a list of all the products
+  const products = productListElement.querySelectorAll(".cart-card");
+
+  products.forEach((product, index) => {
+    let button = product.querySelector(".cart-card__remove");
+
+    button.addEventListener("click", () => {
+      // Remove item from local storage at same index
+      const localStorage = getLocalStorage("so-cart");
+      localStorage.splice(index, 1);
+      setLocalStorage("so-cart", localStorage);
+
+      // Refresh HTML
+      productListElement.innerHTML = "";
+      renderCartContents();
+    });
+  });
 
   // Connect quantity adjustment buttons
   for (let item in cartItems) {
-    const itemCard = productList.querySelector(`.item-${cartItems[item].Id}`)
+    const itemCard = productListElement.querySelector(`.item-${cartItems[item].Id}`)
     const addButton = itemCard.querySelector(".cart-cart__quantity-add");
     const subButton = itemCard.querySelector(".cart-cart__quantity-subtract");
 
@@ -29,6 +46,7 @@ function renderCartContents() {
   if (Array.isArray(cartItems) && cartItems.length > 0) {
     // If the cart is not empty, remove the HTML class that hides the total cost element.
     document.querySelector(".cart-footer").classList.remove("hide");
+    document.querySelector(".cart-footer-empty").classList.add("hide");
 
     // Reduce the card array to gather the total cost of all items.
     const total = cartItems.reduce((final, item) => final += item.FinalPrice * item.multiple, 0);
@@ -42,6 +60,9 @@ function renderCartContents() {
     // Set the text content of the cart total to the formatted price.
     document.querySelector(".cart-total").textContent =
       `Total: ${formattedTotal}`;
+  } else {
+    document.querySelector(".cart-footer").classList.add("hide");
+    document.querySelector(".cart-footer-empty").classList.remove("hide");
   }
 
   updateCartItems();
@@ -66,6 +87,7 @@ function cartItemTemplate(item) {
       <button class="cart-cart__quantity-add quantity-button">+</button>
     </div>
     <p class="cart-card__price">${formattedPrice}</p>
+    <button data-id="${item.Id}" type="button" class="cart-card__remove">Remove</button> 
   </li>`;
 
   return newItem;

@@ -23,42 +23,42 @@
             <legend>Shipping</legend>
             <label>
               First Name
-              <input type="text" name="fname" id="fname">
+              <input type="text" name="fname" id="fname" minlength="2" maxlength="26" required>
             </label>
             <label>
               Last Name
-              <input type="text" name="lname" id="lname">
+              <input type="text" name="lname" id="lname" required minlength="2" maxlength="26" required>
             </label>
             <label>
               Street
-              <input type="text" name="street" id="street">
+              <input type="text" name="street" id="street" required>
             </label>
             <label>
               City
-              <input type="text" name="city" id="city">
+              <input type="text" name="city" id="city" required>
             </label>
             <label>
               State
-              <input type="text" name="state" id="state">
+              <input type="text" name="state" id="state" pattern="[A-Z]{2}" required>
             </label>
             <label>
               Zip
-              <input type="number" name="zip" id="zip">
+              <input type="number" name="zip" id="zip" min="5" required>
             </label>
           </fieldset>
           <fieldset>
             <legend>Payment</legend>
             <label>
               Card Number
-              <input type="text" name="cardNumber" id="cardNumber">
+              <input type="text" name="cardNumber" id="cardNumber" min="16" max="16" required>
             </label>
             <label>
               Expiration
-              <input type="text" name="expiration" id="expiration">
+              <input type="date" name="expiration" id="expiration" minlength="5" maxlength="5" required> 
             </label>
             <label>
               Security Code
-              <input type="text" name="code" id="code">
+              <input type="text" name="code" id="code" min="3" max="3" required>
             </label>
           </fieldset>
           <fieldset class="order-summary">

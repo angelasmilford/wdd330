@@ -1,9 +1,12 @@
 const baseURL = import.meta.env.VITE_SERVER_URL
 function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
+  const jsonResponse = res.json();
+
+  if (res.ok) { 
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    //throw new Error("Bad Response");
+    throw {name: "servicesError", message: jsonResponse};
   }
 }
 
@@ -28,7 +31,5 @@ export async function checkout(payload) {
     body: JSON.stringify(payload)
   }
   
-  return await fetch(baseURL + "checkout/", options).then((response) => {
-    return response.json()
-  })
+  return await fetch(baseURL + "checkout/", options).then(jsonResponse);
 }

@@ -24,6 +24,13 @@ checkoutForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const form = event.target;
+    var myForm = document.forms[0];
+    var chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+
+    if(chk_status){
+        checkoutProcess.checkout();
+    }
 
     try {
         checkoutHandler.calculateOrderTotal(zipInput.value);

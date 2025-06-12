@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils.mjs"
+import { setLocalStorage } from "./utils.mjs";
 
 function packageItems(items) {
     const simplifiedItems = items.map((item) => {
@@ -103,5 +104,13 @@ export default class checkoutProcess {
         convertedJson.tax = `${this.tax}`;
         
         return convertedJson;
+
+        try{
+            window.location.href="checkout/success.html";
+            localStorage.removeItem(this.key);
+        } catch(err){
+            console.error("Checkout failed:", err);
+            alert("There was an error processing your order. Please try again.");
+        }
     }
 }

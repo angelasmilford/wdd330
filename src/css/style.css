@@ -345,7 +345,7 @@ button.quantity-button {
   body {
     max-width: 1080px;
     margin-top: auto;
-    margin: auto 0;
+    margin: 0 auto;
   }
 
   .sort-button {

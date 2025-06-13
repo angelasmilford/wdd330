@@ -1,6 +1,5 @@
 import { findProductById } from "./externalServices.mjs";
-import { getLocalStorage, setLocalStorage, updateCartItems } from "./utils.mjs";
-import { alertMessage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, startCartAnimation, updateCartItems } from "./utils.mjs";
 
 export function productDetails(productId) {
     renderProductDetails(productId)
@@ -81,11 +80,11 @@ function addProductToCart(productId) {
   } else {
     existingItem.multiple += 1;
 
-    console.log(existingItem.multiple)
+    // console.log(existingItem.multiple)
   }
+
+  startCartAnimation();
 
   setLocalStorage("so-cart", cart); //saves the updated cart array back to localStorage as a JSON string under the key "so-cart".
   updateCartItems();
-
-  alertMessage("Product added to cart successfully!", "success");
 }

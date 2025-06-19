@@ -1,5 +1,6 @@
 import { findProductById } from "./externalServices.mjs";
 import { getLocalStorage, setLocalStorage, updateCartItems } from "./utils.mjs";
+import { alertMessage } from "./utils.mjs";
 
 export function productDetails(productId) {
     renderProductDetails(productId)
@@ -85,4 +86,6 @@ function addProductToCart(productId) {
 
   setLocalStorage("so-cart", cart); //saves the updated cart array back to localStorage as a JSON string under the key "so-cart".
   updateCartItems();
+
+  alertMessage("Product added to cart successfully!", "success");
 }

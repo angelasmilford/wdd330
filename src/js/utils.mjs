@@ -97,3 +97,23 @@ export function updateCartItems() {
     }
   }, 100);
 }
+
+export function alertMessage(message, scroll=true){
+  const main = document.querySelector("main");
+  
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.textContent = message;
+
+  alert.addEventListener('click', function(e) {
+    if(e.target.classList.contains('close-button')) {
+      alert.remove();
+    }
+  })
+
+  main.prepend(alert);
+
+  if(scroll){
+    window.scrollTo(0, 0);
+  }
+}

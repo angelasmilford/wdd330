@@ -79,6 +79,9 @@ export async function loadHeaderFooter() {
 
 export function updateCartItems() {
   let cartContents = getLocalStorage("so-cart");
+
+  if (cartContents === null) return;
+
   let itemCount = cartContents.reduce((accum, item) => accum + item.multiple, 0);
 
   // Unsure if this is the best way to wait for the cart-item element to load in, but this is what I've got.

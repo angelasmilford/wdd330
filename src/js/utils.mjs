@@ -120,3 +120,12 @@ export function alertMessage(message, scroll=true){
     window.scrollTo(0, 0);
   }
 }
+
+export function formatCurrency(amount) {
+  const formattedTotal = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+  }).format(amount);
+
+  return formattedTotal;
+}

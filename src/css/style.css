@@ -186,12 +186,36 @@ button.quantity-button {
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
+  position: relative;
 }
 
 .product-card h2,
 .product-card h3,
 .product-card p {
   margin: 0.5em 0;
+}
+
+.product-card__clearance-price {
+  background-color: var(--secondary-button-color);
+  color: white;
+  display: inline;
+  padding: 0.25em;
+}
+
+.product-card__clearance-indicator {
+  background-color: var(--secondary-button-color);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0.5em;
+  padding: 0.25em;
+}
+
+.product-page__clearance-indicator {
+  background-color: var(--secondary-button-color);
+    color: white;
+    display: inline;
+    padding: 0.25em;
 }
 
 .card__brand {
@@ -340,6 +364,11 @@ button.quantity-button {
   height: 5em;
 }
 
+p.clearance {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -348,7 +377,7 @@ button.quantity-button {
   }
 
   .sort-button {
-    font-size: medium;
+    font-size: small;
     width: 100%;
     border-radius: 0.5em;
     margin: 0.25em;

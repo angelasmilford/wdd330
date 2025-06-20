@@ -1,5 +1,5 @@
 import { findProductById } from "./externalServices.mjs";
-import { getLocalStorage, setLocalStorage, updateCartItems } from "./utils.mjs";
+import { formatCurrency, getLocalStorage, setLocalStorage, updateCartItems } from "./utils.mjs";
 import { alertMessage } from "./utils.mjs";
 
 export function productDetails(productId) {
@@ -11,6 +11,16 @@ async function renderProductDetails(productId) {
     // const name = document.getElementById("productName");
     // name.textContent = tentJson.Name;
     if (tentJson) {
+      if (tentJson.IsClearance) {
+        const discountPercentage = parseFloat((tentJson.SuggestedRetailPrice - tentJson.FinalPrice)/tentJson.SuggestedRetailPrice * 100).toFixed(2);
+
+        document.getElementById("productFinalPrice").classList.remove("hide");
+        document.getElementById("productRetailPrice").classList.add("clearance");
+        document.getElementById("clearance-indicator").classList.remove("hide");
+        document.getElementById("product-discount-percentage").classList.remove("hide");
+        document.getElementById("product-discount-percentage").textContent = `${discountPercentage}% off`;
+      }
+
       document
           .getElementById("productName")
           .textContent = tentJson.Name;
@@ -20,9 +30,12 @@ async function renderProductDetails(productId) {
       document
           .getElementById("productImage")
           .src = tentJson.Images.PrimaryLarge;
+        document
+          .getElementById("productRetailPrice")
+          .textContent = `${formatCurrency(tentJson.SuggestedRetailPrice)}`;
       document
           .getElementById("productFinalPrice")
-          .textContent = `$${tentJson.FinalPrice}`;
+          .textContent = `${formatCurrency(tentJson.FinalPrice)}`;
       document
           .getElementById("productColorName")
           .textContent = tentJson.Colors[0].ColorName;
@@ -80,8 +93,6 @@ function addProductToCart(productId) {
     cart.push(productId)
   } else {
     existingItem.multiple += 1;
-
-    console.log(existingItem.multiple)
   }
 
   setLocalStorage("so-cart", cart); //saves the updated cart array back to localStorage as a JSON string under the key "so-cart".

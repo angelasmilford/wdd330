@@ -1,6 +1,6 @@
 
 import { getProductsByCategory } from "./externalServices.mjs"
-import { renderListWithTemplate } from "./utils.mjs";
+import { formatCurrency, renderListWithTemplate } from "./utils.mjs";
 
 // function renderList(selector, productList) {
 //     let htmlStrings = productList.map((item) => productCardTemplate(item));
@@ -14,16 +14,25 @@ function filterList(list) {
 }
 
 function productCardTemplate(product) {
-    return `<li class="product-card">
-            <a href="../product_pages/index.html?product=${product.Id}">
-              <img
-                src="${product.Images.PrimaryMedium}"
-                alt="${product.Name}"
-              />
-              <h3 class="card__brand">${product.Brand.Name}</h3>
-              <h2 class="card__name">${product.Name}</h2>
-              <p class="product-card__price">$${product.FinalPrice}</p></a>
-          </li>`
+  const clearanceIndicatorElement = product.IsClearance && `<p class="product-card__clearance-indicator">Clearance</p>` || "";
+  const productCardElement = `<p class="product-card__price${ product.IsClearance && " clearance" || ""}">${formatCurrency(product.SuggestedRetailPrice)}</p>`;
+  const productCardClearanceElement = product.IsClearance && `<p class="product-card__clearance-price">${formatCurrency(product.FinalPrice)}</p>` || "";
+  const discountPercentage = parseFloat((product.SuggestedRetailPrice - product.FinalPrice)/product.SuggestedRetailPrice * 100).toFixed(2);
+  const productCartPercentElement = product.IsClearance && `<p class="product-card__clearance-price">${discountPercentage}% off</p>` || "";
+
+  return `<li class="product-card">
+          <a href="../product_pages/index.html?product=${product.Id}">
+            <img
+              src="${product.Images.PrimaryMedium}"
+              alt="${product.Name}"
+            />
+            <h3 class="card__brand">${product.Brand.Name}</h3>
+            <h2 class="card__name">${product.Name}</h2>
+            ${clearanceIndicatorElement}
+            ${productCardElement}
+            ${productCardClearanceElement}
+            ${productCartPercentElement}</a>
+        </li>`
 }
 
 export async function sortedProductList(selector, category, method="default") {
@@ -31,10 +40,10 @@ export async function sortedProductList(selector, category, method="default") {
 
   switch (method) {
     case "high-to-low":
-      list.sort((a, b) => a.FinalPrice < b.FinalPrice);
+      list.sort((a, b) => (a.IsClearance && a.FinalPrice || a.SuggestedRetailPrice) < (b.IsClearance && b.FinalPrice || b.SuggestedRetailPrice));
       break;
     case "low-to-high":
-      list.sort((a, b) => a.FinalPrice > b.FinalPrice);
+      list.sort((a, b) => (a.IsClearance && a.FinalPrice || a.SuggestedRetailPrice) > (b.IsClearance && b.FinalPrice || b.SuggestedRetailPrice));
       break;
     case "name-a-z":
       list.sort((a, b) => a.Name > b.Name);
@@ -44,6 +53,11 @@ export async function sortedProductList(selector, category, method="default") {
       break;
     case "brand":
       list.sort((a, b) => a.Brand.Name > b.Brand.Name);
+      break;
+    case "clearance":
+      list.sort((a, b) => !a.IsClearance)
+      break;
+    default:
       break;
   }
 

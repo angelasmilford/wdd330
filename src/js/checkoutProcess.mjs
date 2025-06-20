@@ -1,5 +1,4 @@
-import { getLocalStorage } from "./utils.mjs"
-import { setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, formatCurrency } from "./utils.mjs"
 
 function packageItems(items) {
     const simplifiedItems = items.map((item) => {
@@ -13,15 +12,6 @@ function packageItems(items) {
     })
     
     return simplifiedItems;
-}
-
-function formatCurrency(amount) {
-    const formattedTotal = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-    }).format(amount);
-
-    return formattedTotal;
 }
 
 export default class checkoutProcess {

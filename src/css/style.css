@@ -229,7 +229,7 @@ button.quantity-button {
   grid-column: 1;
 }
 
-.cart-card>p {
+.cart-card > p {
   margin-top: 0;
 }
 
@@ -298,7 +298,6 @@ button.quantity-button {
   text-align: center;
   color: black;
   text-decoration: none;
-  
 }
 
 .sort-buttons {
@@ -349,7 +348,7 @@ button.quantity-button {
   }
 
   .sort-button {
-    font-size: medium; 
+    font-size: medium;
     width: 100%;
     border-radius: 0.5em;
     margin: 0.25em;
@@ -372,9 +371,8 @@ button.quantity-button {
   .icons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
- }
+  }
 }
-
 
 footer {
   font-size: var(--small-font);

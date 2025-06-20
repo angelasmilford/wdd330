@@ -1,7 +1,7 @@
 import {
   getLocalStorage,
   setLocalStorage,
-  getParams, 
+  getParams,
   loadHeaderFooter,
   updateCartItems,
 } from "./utils.mjs";

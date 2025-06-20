@@ -11,16 +11,15 @@ function convertToJson(res) {
 }
 
 export async function getProductsByCategory(category) {
-
-  return await fetch(baseURL + `products/search/${category}`)
-    .then(convertToJson)
-    .then((data) => data.Result);
+  const response = await fetch(baseURL + `products/search/${category}`);
+  const data = await convertToJson(response)
+  return data.Result
 }
 
 export async function findProductById(id) {
-  return await fetch(baseURL + `product/${id}`)
-    .then(convertToJson)
-    .then((data) => data.Result);
+  const response = await fetch(baseURL + `products/${id}`);
+  const data = await convertToJson(response)
+  return data.Result
 }
 
 export async function checkout(payload) {

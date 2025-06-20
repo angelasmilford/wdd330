@@ -1,4 +1,9 @@
-import { getLocalStorage, loadHeaderFooter, setLocalStorage, updateCartItems } from "./utils.mjs";
+import {
+  getLocalStorage,
+  loadHeaderFooter,
+  setLocalStorage,
+  updateCartItems,
+} from "./utils.mjs";
 
 function renderCartContents() {
   let productListElement = document.querySelector(".product-list");
@@ -26,7 +31,9 @@ function renderCartContents() {
 
   // Connect quantity adjustment buttons
   for (let item in cartItems) {
-    const itemCard = productListElement.querySelector(`.item-${cartItems[item].Id}`)
+    const itemCard = productListElement.querySelector(
+      `.item-${cartItems[item].Id}`,
+    );
     const addButton = itemCard.querySelector(".cart-cart__quantity-add");
     const subButton = itemCard.querySelector(".cart-cart__quantity-subtract");
 
@@ -49,7 +56,10 @@ function renderCartContents() {
     document.querySelector(".cart-footer-empty").classList.add("hide");
 
     // Reduce the card array to gather the total cost of all items.
-    const total = cartItems.reduce((final, item) => final += item.FinalPrice * item.multiple, 0);
+    const total = cartItems.reduce(
+      (final, item) => (final += item.FinalPrice * item.multiple),
+      0,
+    );
 
     // Convert the total price in the cart to a formatted USD string.
     const formattedTotal = new Intl.NumberFormat("en-US", {
@@ -69,11 +79,14 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
-  const formattedPrice = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.FinalPrice * item.multiple)
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(item.FinalPrice * item.multiple);
   const newItem = `<li class="cart-card divider item-${item.Id}">
     <a href="#" class="cart-card__image">
       <img
-        src="${item.Images && item.Images.PrimaryMedium || item.Image}"
+        src="${(item.Images && item.Images.PrimaryMedium) || item.Image}"
         alt="${item.Name}"
       />
     </a>
